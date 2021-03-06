@@ -1,0 +1,112 @@
+{
+  "charactorListWithRarity": [
+    {
+      "charactor": [
+        {
+          "Name": "Com_A",
+          "HavingCount": 40
+        },
+        {
+          "Name": "Com_B",
+          "HavingCount": 30
+        },
+        {
+          "Name": "Com_C",
+          "HavingCount": 47
+        },
+        {
+          "Name": "Com_D",
+          "HavingCount": 24
+        },
+        {
+          "Name": "Com_E",
+          "HavingCount": 26
+        }
+      ]
+    },
+    {
+      "charactor": [
+        {
+          "Name": "Rar_F",
+          "HavingCount": 21
+        },
+        {
+          "Name": "Rar_G",
+          "HavingCount": 13
+        },
+        {
+          "Name": "Rar_H",
+          "HavingCount": 21
+        },
+        {
+          "Name": "Rar_I",
+          "HavingCount": 21
+        },
+        {
+          "Name": "Rar_J",
+          "HavingCount": 24
+        }
+      ]
+    },
+    {
+      "charactor": [
+        {
+          "Name": "Epi_K",
+          "HavingCount": 16
+        },
+        {
+          "Name": "Epi_L",
+          "HavingCount": 8
+        },
+        {
+          "Name": "Epi_M",
+          "HavingCount": 10
+        },
+        {
+          "Name": "Epi_N",
+          "HavingCount": 16
+        },
+        {
+          "Name": "Epi_O",
+          "HavingCount": 9
+        }
+      ]
+    },
+    {
+      "charactor": [
+        {
+          "Name": "LEG_P",
+          "HavingCount": 2
+        },
+        {
+          "Name": "LEG_Q",
+          "HavingCount": 0
+        },
+        {
+          "Name": "LEG_R",
+          "HavingCount": 1
+        },
+        {
+          "Name": "LEG_S",
+          "HavingCount": 0
+        },
+        {
+          "Name": "LEG_T",
+          "HavingCount": 1
+        }
+      ]
+    },
+    {
+      "charactor": [
+        {
+          "Name": "EV_PickUp_A",
+          "HavingCount": 0
+        },
+        {
+          "Name": "EV_PickUp_B",
+          "HavingCount": 0
+        }
+      ]
+    }
+  ]
+}
