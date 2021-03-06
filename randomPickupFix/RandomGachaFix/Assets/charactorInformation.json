@@ -4,23 +4,23 @@
       "charactor": [
         {
           "Name": "Com_A",
-          "HavingCount": 40
+          "HavingCount": 63
         },
         {
           "Name": "Com_B",
-          "HavingCount": 30
+          "HavingCount": 46
         },
         {
           "Name": "Com_C",
-          "HavingCount": 47
+          "HavingCount": 34
         },
         {
           "Name": "Com_D",
-          "HavingCount": 24
+          "HavingCount": 66
         },
         {
           "Name": "Com_E",
-          "HavingCount": 26
+          "HavingCount": 50
         }
       ]
     },
@@ -28,23 +28,23 @@
       "charactor": [
         {
           "Name": "Rar_F",
-          "HavingCount": 21
+          "HavingCount": 25
         },
         {
           "Name": "Rar_G",
-          "HavingCount": 13
+          "HavingCount": 30
         },
         {
           "Name": "Rar_H",
-          "HavingCount": 21
+          "HavingCount": 32
         },
         {
           "Name": "Rar_I",
-          "HavingCount": 21
+          "HavingCount": 24
         },
         {
           "Name": "Rar_J",
-          "HavingCount": 24
+          "HavingCount": 29
         }
       ]
     },
@@ -52,19 +52,19 @@
       "charactor": [
         {
           "Name": "Epi_K",
-          "HavingCount": 16
+          "HavingCount": 21
         },
         {
           "Name": "Epi_L",
-          "HavingCount": 8
+          "HavingCount": 16
         },
         {
           "Name": "Epi_M",
-          "HavingCount": 10
+          "HavingCount": 19
         },
         {
           "Name": "Epi_N",
-          "HavingCount": 16
+          "HavingCount": 17
         },
         {
           "Name": "Epi_O",
@@ -84,15 +84,15 @@
         },
         {
           "Name": "LEG_R",
-          "HavingCount": 1
+          "HavingCount": 2
         },
         {
           "Name": "LEG_S",
-          "HavingCount": 0
+          "HavingCount": 2
         },
         {
           "Name": "LEG_T",
-          "HavingCount": 1
+          "HavingCount": 0
         }
       ]
     },
@@ -100,7 +100,7 @@
       "charactor": [
         {
           "Name": "EV_PickUp_A",
-          "HavingCount": 0
+          "HavingCount": 3
         },
         {
           "Name": "EV_PickUp_B",

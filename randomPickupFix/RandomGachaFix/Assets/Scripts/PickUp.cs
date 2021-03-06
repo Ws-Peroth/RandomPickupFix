@@ -297,8 +297,6 @@ public class PickUp : MonoBehaviour
 
     public void ShowHavingCharactorList()
     {
-        havingTextRect.SetActive(true);
-
         string text = "Charactor List\n\n";
         string[] rarityName = new string[] { "Common", "Rare", "Epic", "Legend", "Event Legend" };
 
@@ -323,6 +321,8 @@ public class PickUp : MonoBehaviour
         Debug.Log(text);
         
         havingCharactorText.text = text;
+
+        havingTextRect.SetActive(true);
     }
 
     public void CloseHavingCharactorList()
@@ -339,7 +339,7 @@ public class PickUp : MonoBehaviour
     private void Update()
     {
         count.text = "상시 뽑기 : " + pickupCount;
-        eventCount.text = "이벤트 뽑기 : " + picktryEvent;
+        eventCount.text = "이벤트 뽑기 : " + pickupEventCount;
     }
 }
 
