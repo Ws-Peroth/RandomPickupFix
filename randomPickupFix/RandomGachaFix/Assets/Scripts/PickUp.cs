@@ -1,12 +1,17 @@
 ﻿using Newtonsoft.Json;
-using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Linq;
-using System.IO;
-using System.ComponentModel;
-using UnityEngine.SceneManagement;
+
+public enum Rarities
+{
+    COMMON = 0,
+    RARE,
+    EPIC,
+    LEGEND,
+    EVENT_LEGEND
+}
 
 public class PickUp : MonoBehaviour
 {
@@ -19,18 +24,11 @@ public class PickUp : MonoBehaviour
     int minRarity = 1;
     int maxRarity = 5;
 
-    int commonRarity = 1;
-    int rareRarity = 2;
-    int epicRarity = 3;
-    int legendRarity = 4;
-    int eventLegendRarity = 5;
-
     int topNumber = 90;
     int rotationNumber = 10;
 
     public bool isPickUpTurn = false;
-    bool isPiking = false;
-    // bool isEventPickup = false;
+    bool pickable = false;
 
     public int pickupCount = 0;
     public int pickupEventCount = 0;
@@ -39,18 +37,56 @@ public class PickUp : MonoBehaviour
     string path;
 
     float pickupPercent;
-    // int pickupCharactorNumber;
     public int picktryEvent;
     public int picktry;
 
     float[] rarity = new float[] { 50.0f, 35.0f, 10.0f, 0.6f }; // { common, rare, epic, legend }
 
-    // Idx  :   Rarity 
-    // 0    :   common
-    // 1    :   rare
-    // 2    :   epic
-    // 3    :   legend
-    // 4    :   legend_event
+    int rarityToInt(Rarities rarity)
+    {
+        switch(rarity)
+        {
+            case Rarities.COMMON:
+                return 0;
+
+            case Rarities.RARE:
+                return 1;
+
+            case Rarities.EPIC:
+                return 2;
+
+            case Rarities.LEGEND:
+                return 3;
+
+            case Rarities.EVENT_LEGEND:
+                return 4;
+        }
+
+        return -1;
+    }
+
+    Rarities intToRarity(int rarity)
+    {
+        switch (rarity)
+        {
+            case 0:
+                return Rarities.COMMON;
+
+            case 1:
+                return Rarities.RARE;
+
+            case 2:
+                return Rarities.EPIC;
+
+            case 3:
+                return Rarities.LEGEND;
+
+            case 4:
+                return Rarities.EVENT_LEGEND;
+        }
+
+        return Rarities.COMMON;
+    }
 
     void LoadData()
     {
@@ -80,32 +116,32 @@ public class PickUp : MonoBehaviour
         string[] charactorList_Common = new string[] { "Com_A", "Com_B", "Com_C", "Com_D", "Com_E" };
         string[] charactorList_Rare = new string[] { "Rar_F", "Rar_G", "Rar_H", "Rar_I", "Rar_J" };
         string[] charactorList_Epic = new string[] { "Epi_K", "Epi_L", "Epi_M", "Epi_N", "Epi_O" };
-
-        string[] charactorList_Legendary = new string[] { "LEG_P", "LEG_Q", "LEG_R", "LEG_S", "LEG_T" };
-        string[] charactorList_PickupLegendary = new string[] { "EV_PickUp_A", "EV_PickUp_B" };
+        string[] charactorList_Legend = new string[] { "LEG_P", "LEG_Q", "LEG_R", "LEG_S", "LEG_T" };
+        string[] charactorList_EventLegend = new string[] { "EV_PickUp_A", "EV_PickUp_B" };
 
         pickupPercent = 50.0f;
         // pickupCharactorNumber = 2;
         picktry = 0;
         picktryEvent = 0;
 
-        bool isExists = File.Exists(path);
-
-        if (!isExists)
+        if (!File.Exists(path))
         {
             // Charactors 형태의 빈 파일 생성
-            string initJson = JsonConvert.SerializeObject(new CharactorPool() { charactorListWithRarity = new List<CharactorList>() }, Formatting.Indented);
+            string initJson = JsonConvert.SerializeObject(
+                new CharactorPool(),
+                Formatting.Indented
+            );
             File.WriteAllText(path, initJson);
 
             // 생성된 파일을 읽어옴, 그 후 Charactors 형으로 변형
             var loadJson = File.ReadAllText(path);
             CharactorPool initCharactor = JsonConvert.DeserializeObject<CharactorPool>(loadJson);
 
-            AddInitData(initCharactor, charactorList_Common, commonRarity);
-            AddInitData(initCharactor, charactorList_Rare, rareRarity);
-            AddInitData(initCharactor, charactorList_Epic, epicRarity);
-            AddInitData(initCharactor, charactorList_Legendary, legendRarity);
-            AddInitData(initCharactor, charactorList_PickupLegendary, eventLegendRarity);
+            initCharactor.AddInitData(charactorList_Common);
+            initCharactor.AddInitData(charactorList_Rare);
+            initCharactor.AddInitData(charactorList_Epic);
+            initCharactor.AddInitData(charactorList_Legend);
+            initCharactor.AddInitData(charactorList_EventLegend);
 
             string json = JsonConvert.SerializeObject(initCharactor, Formatting.Indented);
             File.WriteAllText(path, json);
@@ -114,85 +150,68 @@ public class PickUp : MonoBehaviour
         LoadData();
     }
 
-    void AddInitData(CharactorPool initCharactor, string[] charactorList, int rarity)
-    {
-        initCharactor.charactorListWithRarity.Add(new CharactorList());
-
-        foreach (string charactor in charactorList)
-        {
-            initCharactor.charactorListWithRarity[rarity - 1].charactor.Add(
-                new Charactor()
-                {
-                    Name = charactor,
-                    HavingCount = 0
-                }
-            );
-        }
-    }
-
     bool IsPercentPass(float passPoint)
     {
         return Random.Range(0.0f, 100.0f) <= passPoint;
     }
 
-    string ReturnGetCharactor(int rarity, bool IsPickup)
+    string ReturnCharactorPickup(Rarities rarity)
     {
         Debug.Log(rarity);
 
-        int listLength = charactorPool.charactorListWithRarity[rarity - 1].charactor.Count;
-
-        string pickCharactor;
-        int pickedIndex;
-
-        if (rarity >= legendRarity) // legend 확정
+        if(rarity >= Rarities.LEGEND)
         {
-            if (IsPickup) // 픽업 Legend
+            if(IsPercentPass(pickupPercent) || isPickUpTurn)
             {
-                if (IsPercentPass(pickupPercent) || isPickUpTurn)  // 반천장 픽업
-                {
-                    rarity = eventLegendRarity;
-                    listLength = charactorPool.charactorListWithRarity[rarity - 1].charactor.Count;
+                rarity = Rarities.EVENT_LEGEND;
 
-                    pickedIndex = Random.Range(0, listLength);
-                    picktryEvent = 0;
-                    isPickUpTurn = false;
-                }
-                else // 반천장 픽뚫
-                {
-                    pickedIndex = Random.Range(0, listLength);
-                    picktryEvent = 0;
-                    isPickUpTurn = true;
-                }
+                picktryEvent = 0;
+                isPickUpTurn = false;
             }
-            else // 상시 Legend
+            else
             {
-                pickedIndex = Random.Range(0, listLength);
-                picktry = 0;
+                picktryEvent = 0;
+                isPickUpTurn = true;
             }
         }
-        else // 레어도 1~3
-        {
-            pickedIndex = Random.Range(0, listLength);
-        }
 
-        charactorPool.charactorListWithRarity[rarity - 1].charactor[pickedIndex].HavingCount++;
-        pickCharactor = charactorPool.charactorListWithRarity[rarity - 1].charactor[pickedIndex].Name;
+        Charactor pickedCharactor = charactorPool.GetCharactorList(rarity).GetRandomCharactor();
+        pickedCharactor.HavingCount++;
 
-        Debug.Log("pickup charactor = " + pickCharactor);
-        return pickCharactor;
-
+        Debug.Log("pickup charactor = " + pickedCharactor.Name);
+        return pickedCharactor.Name;
     }
 
-    int SetRarity()
+    string ReturnCharactor(Rarities rarity) //해당 레어도의 캐릭터 하나를 반환
     {
-        for (int i = rarity.Length; i >= 0; i--)
-        {
-            if (i == 0) return minRarity;
-            else if (IsPercentPass(rarity[i - 1])) return i;
+        Debug.Log(rarity);
 
+        if (rarity >= Rarities.LEGEND) // legend 확정
+        {
+            picktry = 0;
         }
 
-        return 0;
+        Charactor pickedCharactor = charactorPool.GetCharactorList(rarity).GetRandomCharactor();
+        pickedCharactor.HavingCount++;
+
+        Debug.Log("pickup charactor = " + pickedCharactor.Name);
+        return pickedCharactor.Name;
+    }
+
+    Rarities SetRarity()
+    {
+        float value = Random.Range(0.0f, 100.0f);
+
+        for(int i = 0; i < rarity.Length; i++)
+        {
+            value -= rarity[i];
+            if(value <= 0.0f)
+            {
+                return intToRarity(i);
+            }
+        }
+
+        return Rarities.COMMON;
     } // return 1 ~ 4
 
     public void EventCharactorPickUp()
@@ -201,51 +220,56 @@ public class PickUp : MonoBehaviour
 
         // isEventPickup = true;
 
-        if (!isPiking)
+        if (!pickable)
         {
-            isPiking = true;
+            pickable = true;
             for (int i = 0; i < 10; i++)
             {
                 pickupEventCount++;
                 picktryEvent++;
 
-                if (picktryEvent == topNumber && isPickUpTurn) // 천장
+                if (picktryEvent == topNumber) // 천장
                 {
-                    int listLength = charactorPool.charactorListWithRarity[maxRarity - 1].charactor.Count;
-                    int pickedIndex = Random.Range(0, listLength);
+                    if(isPickUpTurn)
+                    {
+                        Charactor pickedCharactor = charactorPool.GetEventLegendCharactorList().GetRandomCharactor();
 
-                    charactorPool.charactorListWithRarity[eventLegendRarity - 1].charactor[pickedIndex].HavingCount++;
-                    Debug.Log("pickup charactor = " + charactorPool.charactorListWithRarity[eventLegendRarity - 1].charactor[pickedIndex].Name);
+                        pickedCharactor.HavingCount++;
+                        Debug.Log(
+                            "pickup charactor = " + 
+                            pickedCharactor.Name
+                        );
 
-                    isPickUpTurn = false;
-                    picktryEvent = 0;
-                }
-                else if (picktryEvent == topNumber) // 반천장
-                {
-                    ReturnGetCharactor(legendRarity, true);
+                        isPickUpTurn = false;
+                        picktryEvent = 0;
+                    }
+                    else // 반천장
+                    {
+                        ReturnCharactorPickup(Rarities.LEGEND);
+                    }
                 }
                 else if (picktryEvent % rotationNumber == 0) // 10연차에 Epic 확정
-                    ReturnGetCharactor(epicRarity, true);
-
+                {
+                    ReturnCharactorPickup(Rarities.EPIC);
+                }
                 else
-                    ReturnGetCharactor(SetRarity(), true);
+                {
+                    ReturnCharactorPickup(SetRarity());
+                }
 
                 UpdateData();
             }
         }
-        isPiking = false;
+        pickable = false;
     }
 
     public void CharactorPickUp()
     {
         Debug.Log("상시 가챠");
 
-        // isEventPickup = false;
-
-        if (!isPiking)
+        if (!pickable)
         {
-
-            isPiking = true;
+            pickable = true;
 
             for (int i = 0; i < 10; i++)
             {
@@ -254,20 +278,23 @@ public class PickUp : MonoBehaviour
 
                 if (picktry == topNumber)  // 상시 천장
                 {
-                    ReturnGetCharactor(legendRarity, false);
+                    ReturnCharactor(Rarities.LEGEND);
                 }
 
                 else if (picktry % rotationNumber == 0) // 10연차에 Epic 확정
-                    ReturnGetCharactor(epicRarity, false);
-
+                {
+                    ReturnCharactor(Rarities.EPIC);
+                }
                 else
-                    ReturnGetCharactor(SetRarity(), false);
+                {
+                    ReturnCharactor(SetRarity());
+                }
 
                 UpdateData();
             }
         }
 
-        isPiking = false;
+        pickable = false;
 
     }
 
@@ -329,6 +356,15 @@ public class PickUp : MonoBehaviour
     {
         havingTextRect.SetActive(false);
     }
+    
+    public void ShowPickupCharactorList() {
+        string[] charactorList_Common = new string[] { "Com_A", "Com_B", "Com_C", "Com_D", "Com_E" };
+        string[] charactorList_Rare = new string[] { "Rar_F", "Rar_G", "Rar_H", "Rar_I", "Rar_J" };
+        string[] charactorList_Epic = new string[] { "Epi_K", "Epi_L", "Epi_M", "Epi_N", "Epi_O" };
+
+        string[] charactorList_Legendary = new string[] { "LEG_P", "LEG_Q", "LEG_R", "LEG_S", "LEG_T" };
+        string[] charactorList_PickupLegendary = new string[] { "EV_PickUp_A", "EV_PickUp_B" };
+    }
 
     void Start()
     {
@@ -348,14 +384,68 @@ public class Charactor
 {
     public string Name { get; set; }
     public int HavingCount { get; set; }
+
+    public Charactor(string charactorName)
+    {
+        this.Name = charactorName;
+        this.HavingCount = 0;
+    }
 }
 //특정 레어도를 가진 캐릭터의 리스트
 public class CharactorList
 {
     public List<Charactor> charactor = new List<Charactor>();
+
+    public Charactor GetRandomCharactor()
+    {
+        int randIndex = Random.Range(0, charactor.Count);
+        return charactor[randIndex];
+    }
 }
 //캐릭터 클래스
 public class CharactorPool
 {
     public List<CharactorList> charactorListWithRarity = new List<CharactorList>();
+
+    public void AddInitData(string[] charactorList)
+    {
+        CharactorList tmpCharactorList = new CharactorList();
+
+        foreach (string charactor in charactorList)
+        {
+            tmpCharactorList.charactor.Add(
+                new Charactor(charactor)
+            );
+        }
+
+        this.charactorListWithRarity.Add(tmpCharactorList);
+    }
+
+    public CharactorList GetCharactorList(Rarities rarity)
+    {
+        switch (rarity)
+        {
+            case Rarities.COMMON:
+                return charactorListWithRarity[0];
+            
+            case Rarities.RARE:
+                return charactorListWithRarity[1];
+            
+            case Rarities.EPIC:
+                return charactorListWithRarity[2];
+
+            case Rarities.LEGEND:
+                return charactorListWithRarity[3];
+
+            case Rarities.EVENT_LEGEND:
+                return charactorListWithRarity[4];
+        }
+
+        return null;
+    }
+
+    public CharactorList GetEventLegendCharactorList()
+    {
+        return charactorListWithRarity[4];
+    }
 }

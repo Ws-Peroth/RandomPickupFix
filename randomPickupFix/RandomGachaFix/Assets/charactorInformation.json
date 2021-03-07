@@ -4,23 +4,23 @@
       "charactor": [
         {
           "Name": "Com_A",
-          "HavingCount": 63
+          "HavingCount": 189
         },
         {
           "Name": "Com_B",
-          "HavingCount": 46
+          "HavingCount": 196
         },
         {
           "Name": "Com_C",
-          "HavingCount": 34
+          "HavingCount": 204
         },
         {
           "Name": "Com_D",
-          "HavingCount": 66
+          "HavingCount": 182
         },
         {
           "Name": "Com_E",
-          "HavingCount": 50
+          "HavingCount": 176
         }
       ]
     },
@@ -28,23 +28,23 @@
       "charactor": [
         {
           "Name": "Rar_F",
-          "HavingCount": 25
+          "HavingCount": 101
         },
         {
           "Name": "Rar_G",
-          "HavingCount": 30
+          "HavingCount": 119
         },
         {
           "Name": "Rar_H",
-          "HavingCount": 32
+          "HavingCount": 113
         },
         {
           "Name": "Rar_I",
-          "HavingCount": 24
+          "HavingCount": 120
         },
         {
           "Name": "Rar_J",
-          "HavingCount": 29
+          "HavingCount": 113
         }
       ]
     },
@@ -52,23 +52,23 @@
       "charactor": [
         {
           "Name": "Epi_K",
-          "HavingCount": 21
+          "HavingCount": 79
         },
         {
           "Name": "Epi_L",
-          "HavingCount": 16
+          "HavingCount": 69
         },
         {
           "Name": "Epi_M",
-          "HavingCount": 19
+          "HavingCount": 76
         },
         {
           "Name": "Epi_N",
-          "HavingCount": 17
+          "HavingCount": 69
         },
         {
           "Name": "Epi_O",
-          "HavingCount": 9
+          "HavingCount": 61
         }
       ]
     },
@@ -76,23 +76,23 @@
       "charactor": [
         {
           "Name": "LEG_P",
-          "HavingCount": 2
+          "HavingCount": 3
         },
         {
           "Name": "LEG_Q",
-          "HavingCount": 0
+          "HavingCount": 4
         },
         {
           "Name": "LEG_R",
-          "HavingCount": 2
+          "HavingCount": 4
         },
         {
           "Name": "LEG_S",
-          "HavingCount": 2
+          "HavingCount": 5
         },
         {
           "Name": "LEG_T",
-          "HavingCount": 0
+          "HavingCount": 1
         }
       ]
     },
@@ -100,11 +100,11 @@
       "charactor": [
         {
           "Name": "EV_PickUp_A",
-          "HavingCount": 3
+          "HavingCount": 4
         },
         {
           "Name": "EV_PickUp_B",
-          "HavingCount": 0
+          "HavingCount": 2
         }
       ]
     }
