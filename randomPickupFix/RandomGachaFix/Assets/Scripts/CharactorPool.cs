@@ -25,23 +25,13 @@ public class CharactorPool
     {
         switch (rarity)
         {
-            case Rarities.COMMON:
-                return charactorListWithRarity[0];
-
-            case Rarities.RARE:
-                return charactorListWithRarity[1];
-
-            case Rarities.EPIC:
-                return charactorListWithRarity[2];
-
-            case Rarities.LEGEND:
-                return charactorListWithRarity[3];
-
-            case Rarities.EVENT_LEGEND:
-                return charactorListWithRarity[4];
+            case Rarities.COMMON: return charactorListWithRarity[0];
+            case Rarities.RARE: return charactorListWithRarity[1];
+            case Rarities.EPIC: return charactorListWithRarity[2];
+            case Rarities.LEGEND: return charactorListWithRarity[3];
+            case Rarities.EVENT_LEGEND: return charactorListWithRarity[4];
+            default: return null;
         }
-
-        return null;
     }
 
     public CharactorList GetEventLegendCharactorList()
@@ -74,3 +64,4 @@ public class Charactor
         this.HavingCount = 0;
     }
 }
+
