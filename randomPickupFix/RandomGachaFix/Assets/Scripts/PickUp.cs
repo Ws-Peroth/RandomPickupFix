@@ -16,7 +16,7 @@ public enum Rarities
 public class PickUp : MonoBehaviour
 {
     public GameObject havingTextRect;
-    public Text havingCharactorText;
+    public Text CharactorListText;
     public Text count;
     public Text eventCount;
 
@@ -70,14 +70,42 @@ public class PickUp : MonoBehaviour
         }
     }
 
-    public void CloseHavingCharactorList()
+    public void CloseCharactorListUI()
     {
         havingTextRect.SetActive(false);
     }
     
     public void ShowPickupCharactorList()
     {
+        CharactorListText.text = WritePickupCharactorList();
+        havingTextRect.SetActive(true);
+    }
 
+    private string WritePickupCharactorList()
+    {
+        string text = "Pickup Charactor List\n\n";
+        int listSize;
+        Charactor writeChar;
+
+        for (int i = 0; i <= RarityToInt(Rarities.EVENT_LEGEND); i++)
+        {
+            listSize = charactorPool.charactorListWithRarity[i].charactor.Count;
+            text += "[" + rarityName[i] + "]\n";
+
+            for (int j = 0; j < listSize; j++)
+            {
+                writeChar = charactorPool.charactorListWithRarity[i].charactor[j];
+                if (writeChar.HavingCount > 0)
+                {
+                    text += " - " + writeChar.Name + "\n";
+                }
+            }
+
+            text += "\n";
+        }
+
+        Debug.Log(text);
+        return text;
     }
 
     public void ResetPickup()
@@ -106,7 +134,7 @@ public class PickUp : MonoBehaviour
 
     public void ShowHavingCharactorList()
     {
-        havingCharactorText.text = ReturnHavingCharactorText();
+        CharactorListText.text = WriteHavingCharactorText();
         havingTextRect.SetActive(true);
     }
 
@@ -201,7 +229,7 @@ public class PickUp : MonoBehaviour
     {
         Debug.Log(rarity);
 
-        if (rarity >= Rarities.LEGEND) // legend 확정
+        if (rarity >= Rarities.LEGEND)
         {
             picktry = 0;
         }
@@ -213,9 +241,9 @@ public class PickUp : MonoBehaviour
         return pickedCharactor.Name;
     }
 
-    private string ReturnHavingCharactorText()
+    private string WriteHavingCharactorText()
     {
-        string text = "Charactor List\n\n";
+        string text = "Charactor Inentory\n\n";
         int listSize;
         Charactor writeChar;
 
@@ -265,8 +293,7 @@ public class PickUp : MonoBehaviour
         if (!File.Exists(path))
         {
             string initJson = JsonConvert.SerializeObject(
-                new CharactorPool(),
-                Formatting.Indented
+                new CharactorPool(), Formatting.Indented
             );
 
             File.WriteAllText(path, initJson);
@@ -274,8 +301,10 @@ public class PickUp : MonoBehaviour
             var loadJson = File.ReadAllText(path);
             CharactorPool initCharactor = JsonConvert.DeserializeObject<CharactorPool>(loadJson);
 
-            for(Rarities i = Rarities.COMMON; i <= Rarities.EVENT_LEGEND; i++)
+            for (Rarities i = Rarities.COMMON; i <= Rarities.EVENT_LEGEND; i++)
+            {
                 initCharactor.AddInitData(GetInitializeCharactorList(i));
+            }
 
             string json = JsonConvert.SerializeObject(initCharactor, Formatting.Indented);
             File.WriteAllText(path, json);

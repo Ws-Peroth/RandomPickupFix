@@ -1061,7 +1061,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1825992296}
-        m_MethodName: ShowHavingCharactorList
+        m_MethodName: ShowPickupCharactorList
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2098,7 +2098,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   havingTextRect: {fileID: 206572512}
-  havingCharactorText: {fileID: 1593803294}
+  CharactorListText: {fileID: 1593803294}
   count: {fileID: 1474449982}
   eventCount: {fileID: 1017933089}
   isPickUpTurn: 0
@@ -2632,7 +2632,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1825992296}
-        m_MethodName: CloseHavingCharactorList
+        m_MethodName: CloseCharactorListUI
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
