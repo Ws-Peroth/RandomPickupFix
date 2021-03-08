@@ -4,94 +4,22 @@
       "charactor": [
         {
           "Name": "Com_A",
-          "HavingCount": 189
+          "HavingCount": 1
         },
         {
           "Name": "Com_B",
-          "HavingCount": 196
+          "HavingCount": 0
         },
         {
           "Name": "Com_C",
-          "HavingCount": 204
+          "HavingCount": 0
         },
         {
           "Name": "Com_D",
-          "HavingCount": 182
+          "HavingCount": 2
         },
         {
           "Name": "Com_E",
-          "HavingCount": 176
-        }
-      ]
-    },
-    {
-      "charactor": [
-        {
-          "Name": "Rar_F",
-          "HavingCount": 101
-        },
-        {
-          "Name": "Rar_G",
-          "HavingCount": 119
-        },
-        {
-          "Name": "Rar_H",
-          "HavingCount": 113
-        },
-        {
-          "Name": "Rar_I",
-          "HavingCount": 120
-        },
-        {
-          "Name": "Rar_J",
-          "HavingCount": 113
-        }
-      ]
-    },
-    {
-      "charactor": [
-        {
-          "Name": "Epi_K",
-          "HavingCount": 79
-        },
-        {
-          "Name": "Epi_L",
-          "HavingCount": 69
-        },
-        {
-          "Name": "Epi_M",
-          "HavingCount": 76
-        },
-        {
-          "Name": "Epi_N",
-          "HavingCount": 69
-        },
-        {
-          "Name": "Epi_O",
-          "HavingCount": 61
-        }
-      ]
-    },
-    {
-      "charactor": [
-        {
-          "Name": "LEG_P",
-          "HavingCount": 3
-        },
-        {
-          "Name": "LEG_Q",
-          "HavingCount": 4
-        },
-        {
-          "Name": "LEG_R",
-          "HavingCount": 4
-        },
-        {
-          "Name": "LEG_S",
-          "HavingCount": 5
-        },
-        {
-          "Name": "LEG_T",
           "HavingCount": 1
         }
       ]
@@ -99,12 +27,84 @@
     {
       "charactor": [
         {
+          "Name": "Rar_F",
+          "HavingCount": 0
+        },
+        {
+          "Name": "Rar_G",
+          "HavingCount": 1
+        },
+        {
+          "Name": "Rar_H",
+          "HavingCount": 1
+        },
+        {
+          "Name": "Rar_I",
+          "HavingCount": 0
+        },
+        {
+          "Name": "Rar_J",
+          "HavingCount": 2
+        }
+      ]
+    },
+    {
+      "charactor": [
+        {
+          "Name": "Epi_K",
+          "HavingCount": 2
+        },
+        {
+          "Name": "Epi_L",
+          "HavingCount": 0
+        },
+        {
+          "Name": "Epi_M",
+          "HavingCount": 0
+        },
+        {
+          "Name": "Epi_N",
+          "HavingCount": 0
+        },
+        {
+          "Name": "Epi_O",
+          "HavingCount": 0
+        }
+      ]
+    },
+    {
+      "charactor": [
+        {
+          "Name": "LEG_P",
+          "HavingCount": 0
+        },
+        {
+          "Name": "LEG_Q",
+          "HavingCount": 0
+        },
+        {
+          "Name": "LEG_R",
+          "HavingCount": 0
+        },
+        {
+          "Name": "LEG_S",
+          "HavingCount": 0
+        },
+        {
+          "Name": "LEG_T",
+          "HavingCount": 0
+        }
+      ]
+    },
+    {
+      "charactor": [
+        {
           "Name": "EV_PickUp_A",
-          "HavingCount": 4
+          "HavingCount": 0
         },
         {
           "Name": "EV_PickUp_B",
-          "HavingCount": 2
+          "HavingCount": 0
         }
       ]
     }

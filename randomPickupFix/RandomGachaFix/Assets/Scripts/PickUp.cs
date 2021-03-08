@@ -17,32 +17,29 @@ public class PickUp : MonoBehaviour
 {
     public GameObject havingTextRect;
     public Text havingCharactorText;
-
     public Text count;
     public Text eventCount;
 
-    int minRarity = 1;
-    int maxRarity = 5;
+    CharactorPool charactorPool;
 
-    int topNumber = 90;
-    int rotationNumber = 10;
+    readonly float[] rarity = new float[] { 50.0f, 35.0f, 10.0f, 0.6f }; // { common, rare, epic, legend }
+    readonly int topNumber = 90;
+    readonly int rotationNumber = 10;
 
     public bool isPickUpTurn = false;
-    bool pickable = false;
-
     public int pickupCount = 0;
     public int pickupEventCount = 0;
-
-    CharactorPool charactorPool;
-    string path;
-
-    float pickupPercent;
     public int picktryEvent;
     public int picktry;
 
-    float[] rarity = new float[] { 50.0f, 35.0f, 10.0f, 0.6f }; // { common, rare, epic, legend }
+    string[] rarityName = new string[] { "Common", "Rare", "Epic", "Legend", "Event Legend" };
+    bool pickable = false;
+    string path;
+    float pickupPercent;
 
-    int rarityToInt(Rarities rarity)
+    
+
+    int RarityToInt(Rarities rarity)
     {
         switch(rarity)
         {
@@ -325,12 +322,11 @@ public class PickUp : MonoBehaviour
     public void ShowHavingCharactorList()
     {
         string text = "Charactor List\n\n";
-        string[] rarityName = new string[] { "Common", "Rare", "Epic", "Legend", "Event Legend" };
 
         int listSize;
         Charactor writeChar;
 
-        for (int i = 0; i < maxRarity; i++)
+        for (int i = 0; i < RarityToInt(Rarities.LEGEND); i++)
         {
             listSize = charactorPool.charactorListWithRarity[i].charactor.Count;
             text += "[" + rarityName[i] + "]\n";
@@ -376,76 +372,5 @@ public class PickUp : MonoBehaviour
     {
         count.text = "상시 뽑기 : " + pickupCount;
         eventCount.text = "이벤트 뽑기 : " + pickupEventCount;
-    }
-}
-
-//하나의 캐릭터의 정보를 담고 있는 클래스
-public class Charactor
-{
-    public string Name { get; set; }
-    public int HavingCount { get; set; }
-
-    public Charactor(string charactorName)
-    {
-        this.Name = charactorName;
-        this.HavingCount = 0;
-    }
-}
-//특정 레어도를 가진 캐릭터의 리스트
-public class CharactorList
-{
-    public List<Charactor> charactor = new List<Charactor>();
-
-    public Charactor GetRandomCharactor()
-    {
-        int randIndex = Random.Range(0, charactor.Count);
-        return charactor[randIndex];
-    }
-}
-//캐릭터 클래스
-public class CharactorPool
-{
-    public List<CharactorList> charactorListWithRarity = new List<CharactorList>();
-
-    public void AddInitData(string[] charactorList)
-    {
-        CharactorList tmpCharactorList = new CharactorList();
-
-        foreach (string charactor in charactorList)
-        {
-            tmpCharactorList.charactor.Add(
-                new Charactor(charactor)
-            );
-        }
-
-        this.charactorListWithRarity.Add(tmpCharactorList);
-    }
-
-    public CharactorList GetCharactorList(Rarities rarity)
-    {
-        switch (rarity)
-        {
-            case Rarities.COMMON:
-                return charactorListWithRarity[0];
-            
-            case Rarities.RARE:
-                return charactorListWithRarity[1];
-            
-            case Rarities.EPIC:
-                return charactorListWithRarity[2];
-
-            case Rarities.LEGEND:
-                return charactorListWithRarity[3];
-
-            case Rarities.EVENT_LEGEND:
-                return charactorListWithRarity[4];
-        }
-
-        return null;
-    }
-
-    public CharactorList GetEventLegendCharactorList()
-    {
-        return charactorListWithRarity[4];
     }
 }
