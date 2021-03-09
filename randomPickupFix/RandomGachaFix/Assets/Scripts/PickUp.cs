@@ -53,7 +53,7 @@ public class PickUp : MonoBehaviour
 
         pickingCharactorList = new List<string>();
 
-        Debug.Log("이벤트 가챠");
+        // Debug.Log("이벤트 가챠");
         if (!pickable)
         {
             pickable = true;
@@ -73,7 +73,7 @@ public class PickUp : MonoBehaviour
 
         pickingCharactorList = new List<string>();
 
-        Debug.Log("상시 가챠");
+        // Debug.Log("상시 가챠");
 
         if (!pickable)
         {
@@ -90,12 +90,14 @@ public class PickUp : MonoBehaviour
     {
         pickupCharactorListRect.SetActive(false);
         pickable = false;
+        isSkip = true;
     }
 
     public void ShowPickupCharactorListUI()
     {
         pickingCharactors.text = "Picking Charactor\n\n";
         pickupCharactorListRect.SetActive(true);
+        isSkip = false;
         Invoke(nameof(PickupAnimation), 0.5f);
     }
 
@@ -117,11 +119,11 @@ public class PickUp : MonoBehaviour
 
     IEnumerator PickupCharactorAnimationCouroutine()
     {
-        Debug.Log("Count : " + pickingCharactorList.Count);
+        // Debug.Log("Count : " + pickingCharactorList.Count);
         if (isSkip || pickingCharactorList.Count == 0) yield break;
 
         pickingCharactors.text += pickingCharactorList[0] + "\n";
-        Debug.Log("Couroutine : " + pickingCharactors.text);
+        // Debug.Log("Couroutine : " + pickingCharactors.text);
 
         pickingCharactorList.RemoveAt(0);
         yield return new WaitForSeconds(1.0f);
@@ -149,7 +151,7 @@ public class PickUp : MonoBehaviour
             text += "\n";
         }
 
-        Debug.Log(text);
+        // Debug.Log(text);
         return text;
     }
 
@@ -245,7 +247,7 @@ public class PickUp : MonoBehaviour
 
     private string ReturnEventCharactor(Rarities rarity)
     {
-        Debug.Log(rarity);
+        // Debug.Log(rarity);
 
         if (rarity >= Rarities.LEGEND)
         {
@@ -267,14 +269,14 @@ public class PickUp : MonoBehaviour
         pickedCharactor.HavingCount++;
 
         pickingCharactorList.Add(pickedCharactor.Name);
-        Debug.Log("pickup charactor = " + pickedCharactor.Name);
+        // Debug.Log("pickup charactor = " + pickedCharactor.Name);
 
         return pickedCharactor.Name;
     }
 
     private string ReturnCharactor(Rarities rarity)
     {
-        Debug.Log(rarity);
+        // Debug.Log(rarity);
 
         if (rarity >= Rarities.LEGEND)
         {
@@ -285,7 +287,7 @@ public class PickUp : MonoBehaviour
         pickedCharactor.HavingCount++;
 
         pickingCharactorList.Add(pickedCharactor.Name);
-        Debug.Log("pickup charactor = " + pickedCharactor.Name);
+        // Debug.Log("pickup charactor = " + pickedCharactor.Name);
 
         return pickedCharactor.Name;
     }
@@ -309,7 +311,7 @@ public class PickUp : MonoBehaviour
             text += "\n";
         }
 
-        Debug.Log(text);
+        // Debug.Log(text);
         return text;
     }
 
@@ -364,7 +366,7 @@ public class PickUp : MonoBehaviour
         pickedCharactor.HavingCount++;
 
         pickingCharactorList.Add(pickedCharactor.Name);
-        Debug.Log("pickup charactor = " + pickedCharactor.Name);
+        // Debug.Log("pickup charactor = " + pickedCharactor.Name);
 
         isPickUpTurn = false;
         picktryEvent = 0;
