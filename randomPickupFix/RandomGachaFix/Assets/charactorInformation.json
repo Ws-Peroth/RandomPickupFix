@@ -4,23 +4,23 @@
       "charactor": [
         {
           "Name": "Com_A",
-          "HavingCount": 2
+          "HavingCount": 1
         },
         {
           "Name": "Com_B",
-          "HavingCount": 6
+          "HavingCount": 1
         },
         {
           "Name": "Com_C",
-          "HavingCount": 7
+          "HavingCount": 0
         },
         {
           "Name": "Com_D",
-          "HavingCount": 8
+          "HavingCount": 2
         },
         {
           "Name": "Com_E",
-          "HavingCount": 3
+          "HavingCount": 1
         }
       ]
     },
@@ -28,23 +28,23 @@
       "charactor": [
         {
           "Name": "Rar_F",
-          "HavingCount": 3
+          "HavingCount": 0
         },
         {
           "Name": "Rar_G",
-          "HavingCount": 2
+          "HavingCount": 0
         },
         {
           "Name": "Rar_H",
-          "HavingCount": 6
+          "HavingCount": 1
         },
         {
           "Name": "Rar_I",
-          "HavingCount": 3
+          "HavingCount": 0
         },
         {
           "Name": "Rar_J",
-          "HavingCount": 5
+          "HavingCount": 1
         }
       ]
     },
@@ -52,19 +52,19 @@
       "charactor": [
         {
           "Name": "Epi_K",
-          "HavingCount": 5
+          "HavingCount": 0
         },
         {
           "Name": "Epi_L",
-          "HavingCount": 2
+          "HavingCount": 0
         },
         {
           "Name": "Epi_M",
-          "HavingCount": 3
+          "HavingCount": 1
         },
         {
           "Name": "Epi_N",
-          "HavingCount": 4
+          "HavingCount": 1
         },
         {
           "Name": "Epi_O",

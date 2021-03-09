@@ -53,7 +53,6 @@ public class PickUp : MonoBehaviour
 
         pickingCharactorList = new List<string>();
 
-        // Debug.Log("이벤트 가챠");
         if (!pickable)
         {
             pickable = true;
@@ -62,8 +61,6 @@ public class PickUp : MonoBehaviour
             {
                 EventCharactorPickUp();
             }
-
-            // pickable = false;
         }
     }
 
@@ -72,8 +69,6 @@ public class PickUp : MonoBehaviour
         ShowPickupCharactorListUI();
 
         pickingCharactorList = new List<string>();
-
-        // Debug.Log("상시 가챠");
 
         if (!pickable)
         {
@@ -119,11 +114,9 @@ public class PickUp : MonoBehaviour
 
     IEnumerator PickupCharactorAnimationCouroutine()
     {
-        // Debug.Log("Count : " + pickingCharactorList.Count);
         if (isSkip || pickingCharactorList.Count == 0) yield break;
 
         pickingCharactors.text += pickingCharactorList[0] + "\n";
-        // Debug.Log("Couroutine : " + pickingCharactors.text);
 
         pickingCharactorList.RemoveAt(0);
         yield return new WaitForSeconds(1.0f);
@@ -151,7 +144,6 @@ public class PickUp : MonoBehaviour
             text += "\n";
         }
 
-        // Debug.Log(text);
         return text;
     }
 
@@ -269,14 +261,12 @@ public class PickUp : MonoBehaviour
         pickedCharactor.HavingCount++;
 
         pickingCharactorList.Add(pickedCharactor.Name);
-        // Debug.Log("pickup charactor = " + pickedCharactor.Name);
 
         return pickedCharactor.Name;
     }
 
     private string ReturnCharactor(Rarities rarity)
     {
-        // Debug.Log(rarity);
 
         if (rarity >= Rarities.LEGEND)
         {
@@ -287,7 +277,6 @@ public class PickUp : MonoBehaviour
         pickedCharactor.HavingCount++;
 
         pickingCharactorList.Add(pickedCharactor.Name);
-        // Debug.Log("pickup charactor = " + pickedCharactor.Name);
 
         return pickedCharactor.Name;
     }
@@ -311,13 +300,11 @@ public class PickUp : MonoBehaviour
             text += "\n";
         }
 
-        // Debug.Log(text);
         return text;
     }
 
     private void LoadData()
     {
-        // json에서 값 불러오기
         if (!File.Exists(path)) return;
         else
         {
@@ -328,7 +315,6 @@ public class PickUp : MonoBehaviour
 
     private void UpdateData()
     {
-        // 데이터 json에 저장
         string initJson = JsonConvert.SerializeObject(charactorPool, Formatting.Indented);
         File.WriteAllText(path, initJson);
     }
@@ -366,7 +352,6 @@ public class PickUp : MonoBehaviour
         pickedCharactor.HavingCount++;
 
         pickingCharactorList.Add(pickedCharactor.Name);
-        // Debug.Log("pickup charactor = " + pickedCharactor.Name);
 
         isPickUpTurn = false;
         picktryEvent = 0;
