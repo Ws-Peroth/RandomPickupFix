@@ -4,23 +4,23 @@
       "charactor": [
         {
           "Name": "Com_A",
-          "HavingCount": 192
+          "HavingCount": 208
         },
         {
           "Name": "Com_B",
-          "HavingCount": 195
+          "HavingCount": 207
         },
         {
           "Name": "Com_C",
-          "HavingCount": 174
+          "HavingCount": 182
         },
         {
           "Name": "Com_D",
-          "HavingCount": 179
+          "HavingCount": 195
         },
         {
           "Name": "Com_E",
-          "HavingCount": 179
+          "HavingCount": 194
         }
       ]
     },
@@ -28,23 +28,23 @@
       "charactor": [
         {
           "Name": "Rar_F",
-          "HavingCount": 103
+          "HavingCount": 111
         },
         {
           "Name": "Rar_G",
-          "HavingCount": 113
+          "HavingCount": 121
         },
         {
           "Name": "Rar_H",
-          "HavingCount": 93
+          "HavingCount": 105
         },
         {
           "Name": "Rar_I",
-          "HavingCount": 118
+          "HavingCount": 124
         },
         {
           "Name": "Rar_J",
-          "HavingCount": 124
+          "HavingCount": 137
         }
       ]
     },
@@ -52,23 +52,23 @@
       "charactor": [
         {
           "Name": "Epi_K",
-          "HavingCount": 72
+          "HavingCount": 77
         },
         {
           "Name": "Epi_L",
-          "HavingCount": 59
+          "HavingCount": 67
         },
         {
           "Name": "Epi_M",
-          "HavingCount": 59
+          "HavingCount": 64
         },
         {
           "Name": "Epi_N",
-          "HavingCount": 62
+          "HavingCount": 67
         },
         {
           "Name": "Epi_O",
-          "HavingCount": 54
+          "HavingCount": 55
         }
       ]
     },
@@ -76,7 +76,7 @@
       "charactor": [
         {
           "Name": "LEG_P",
-          "HavingCount": 4
+          "HavingCount": 6
         },
         {
           "Name": "LEG_Q",

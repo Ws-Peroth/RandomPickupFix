@@ -21,6 +21,11 @@ public class CharactorPool
         this.charactorListWithRarity.Add(tmpCharactorList);
     }
 
+    public CharactorList GetCharactorList(int rarity)
+    {
+        return charactorListWithRarity[rarity];
+    }
+
     public CharactorList GetCharactorList(Rarities rarity)
     {
         switch (rarity)

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -13,9 +14,16 @@ public enum Rarities
     EVENT_LEGEND
 }
 
+
+
 public class PickUp : MonoBehaviour
 {
+    public GameObject PickupCharactorContents;
+    public GameObject pickupAnimationPrefebs;
     public GameObject havingTextRect;
+    public GameObject pickupCharactorListRect;
+
+    public Text pickingCharactors;
     public Text CharactorListText;
     public Text count;
     public Text eventCount;
@@ -29,16 +37,22 @@ public class PickUp : MonoBehaviour
     readonly int topNumber = 90;
 
     public bool isPickUpTurn = false;
+    public bool isSkip;
     public int pickupEventCount = 0;
     public int pickupCount = 0;
     public int picktryEvent = 0;
     public int picktry = 0;
-    
+
+    private List<string> pickingCharactorList = new List<string>();
     private bool pickable = false;
     private string path;
 
     public void EventPickupButtonDown()
     {
+        ShowPickupCharactorListUI();
+
+        pickingCharactorList = new List<string>();
+
         Debug.Log("이벤트 가챠");
         if (!pickable)
         {
@@ -49,12 +63,16 @@ public class PickUp : MonoBehaviour
                 EventCharactorPickUp();
             }
 
-            pickable = false;
+            // pickable = false;
         }
     }
 
     public void PickupButtonDown()
     {
+        ShowPickupCharactorListUI();
+
+        pickingCharactorList = new List<string>();
+
         Debug.Log("상시 가챠");
 
         if (!pickable)
@@ -65,9 +83,20 @@ public class PickUp : MonoBehaviour
             {
                 CharactorPickUp();
             }
-
-            pickable = false;
         }
+    }
+
+    public void ClosePickupCharactorListUI()
+    {
+        pickupCharactorListRect.SetActive(false);
+        pickable = false;
+    }
+
+    public void ShowPickupCharactorListUI()
+    {
+        pickingCharactors.text = "Picking Charactor\n\n";
+        pickupCharactorListRect.SetActive(true);
+        Invoke(nameof(PickupAnimation), 0.5f);
     }
 
     public void CloseCharactorListUI()
@@ -75,29 +104,45 @@ public class PickUp : MonoBehaviour
         havingTextRect.SetActive(false);
     }
     
-    public void ShowPickupCharactorList()
+    public void ShowEventCharactorList()
     {
         CharactorListText.text = WritePickupCharactorList();
         havingTextRect.SetActive(true);
     }
 
+    private void PickupAnimation()
+    {
+        StartCoroutine(nameof(PickupCharactorAnimationCouroutine));
+    }
+
+    IEnumerator PickupCharactorAnimationCouroutine()
+    {
+        Debug.Log("Count : " + pickingCharactorList.Count);
+        if (isSkip || pickingCharactorList.Count == 0) yield break;
+
+        pickingCharactors.text += pickingCharactorList[0] + "\n";
+        Debug.Log("Couroutine : " + pickingCharactors.text);
+
+        pickingCharactorList.RemoveAt(0);
+        yield return new WaitForSeconds(1.0f);
+
+        StartCoroutine(nameof(PickupCharactorAnimationCouroutine));
+        yield return null;
+    }
+
     private string WritePickupCharactorList()
     {
         string text = "Pickup Charactor List\n\n";
-        int listSize;
-        Charactor writeChar;
 
         for (int i = 0; i <= RarityToInt(Rarities.EVENT_LEGEND); i++)
         {
-            listSize = charactorPool.charactorListWithRarity[i].charactor.Count;
             text += "[" + rarityName[i] + "]\n";
 
-            for (int j = 0; j < listSize; j++)
+            foreach (Charactor writeChar in charactorPool.GetCharactorList(i).charactor)
             {
-                writeChar = charactorPool.charactorListWithRarity[i].charactor[j];
                 if (writeChar.HavingCount > 0)
                 {
-                    text += " - " + writeChar.Name + "\n";
+                    text += " - " + writeChar.Name  + "\n";
                 }
             }
 
@@ -221,7 +266,9 @@ public class PickUp : MonoBehaviour
         Charactor pickedCharactor = charactorPool.GetCharactorList(rarity).GetRandomCharactor();
         pickedCharactor.HavingCount++;
 
+        pickingCharactorList.Add(pickedCharactor.Name);
         Debug.Log("pickup charactor = " + pickedCharactor.Name);
+
         return pickedCharactor.Name;
     }
 
@@ -237,24 +284,22 @@ public class PickUp : MonoBehaviour
         Charactor pickedCharactor = charactorPool.GetCharactorList(rarity).GetRandomCharactor();
         pickedCharactor.HavingCount++;
 
+        pickingCharactorList.Add(pickedCharactor.Name);
         Debug.Log("pickup charactor = " + pickedCharactor.Name);
+
         return pickedCharactor.Name;
     }
 
     private string WriteHavingCharactorText()
     {
         string text = "Charactor Inentory\n\n";
-        int listSize;
-        Charactor writeChar;
 
         for (int i = 0; i <= RarityToInt(Rarities.EVENT_LEGEND); i++)
         {
-            listSize = charactorPool.charactorListWithRarity[i].charactor.Count;
             text += "[" + rarityName[i] + "]\n";
 
-            for (int j = 0; j < listSize; j++)
+            foreach (Charactor writeChar in charactorPool.GetCharactorList(i).charactor)
             {
-                writeChar = charactorPool.charactorListWithRarity[i].charactor[j];
                 if (writeChar.HavingCount > 0)
                 {
                     text += " - " + writeChar.Name + "  :   " + writeChar.HavingCount + "\n";
@@ -318,6 +363,7 @@ public class PickUp : MonoBehaviour
 
         pickedCharactor.HavingCount++;
 
+        pickingCharactorList.Add(pickedCharactor.Name);
         Debug.Log("pickup charactor = " + pickedCharactor.Name);
 
         isPickUpTurn = false;
