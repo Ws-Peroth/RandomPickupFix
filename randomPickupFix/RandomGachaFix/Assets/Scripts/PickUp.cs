@@ -18,12 +18,13 @@ public enum Rarities
 
 public class PickUp : MonoBehaviour
 {
+    public GameObject textPrefeb;
+
     public GameObject PickupCharactorContents;
-    public GameObject pickupAnimationPrefebs;
     public GameObject havingTextRect;
     public GameObject pickupCharactorListRect;
 
-    public Text pickingCharactors;
+    // public Text pickingCharactors;
     public Text CharactorListText;
     public Text count;
     public Text eventCount;
@@ -90,12 +91,21 @@ public class PickUp : MonoBehaviour
 
     public void ShowPickupCharactorListUI()
     {
-        pickingCharactors.text = "Picking Charactor\n\n";
+
+        //  pickingCharactors.text = "Picking Charactor\n\n";
+
         pickupCharactorListRect.SetActive(true);
         isSkip = false;
+
+        GameObject prefeb = Instantiate(textPrefeb);
+        prefeb.SetActive(true);
+        prefeb.transform.SetParent(PickupCharactorContents.transform);
+        prefeb.transform.localScale = new Vector3(1, 1, 1);
+        prefeb.transform.localPosition = new Vector3(0, 0, 0);
+        prefeb.GetComponent<Text>().text = "Picking Charactor\n";
+
         Invoke(nameof(PickupAnimation), 0.5f);
     }
-
     public void CloseCharactorListUI()
     {
         havingTextRect.SetActive(false);
@@ -116,7 +126,17 @@ public class PickUp : MonoBehaviour
     {
         if (isSkip || pickingCharactorList.Count == 0) yield break;
 
-        pickingCharactors.text += pickingCharactorList[0] + "\n";
+        GameObject prefeb = Instantiate(textPrefeb);
+        prefeb.SetActive(true);
+
+        prefeb.transform.SetParent(PickupCharactorContents.transform);
+
+        prefeb.transform.localScale = new Vector3(1, 1, 1);
+        prefeb.transform.localPosition = new Vector3(0, 0, 0);
+
+        prefeb.GetComponent<Text>().text = pickingCharactorList[0] + "\n";
+
+        //pickingCharactors.text += pickingCharactorList[0] + "\n";
 
         pickingCharactorList.RemoveAt(0);
         yield return new WaitForSeconds(1.0f);

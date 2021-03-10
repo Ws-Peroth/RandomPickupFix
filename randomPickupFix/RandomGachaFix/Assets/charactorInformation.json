@@ -4,23 +4,23 @@
       "charactor": [
         {
           "Name": "Com_A",
-          "HavingCount": 2
+          "HavingCount": 41
         },
         {
           "Name": "Com_B",
-          "HavingCount": 1
+          "HavingCount": 44
         },
         {
           "Name": "Com_C",
-          "HavingCount": 0
+          "HavingCount": 31
         },
         {
           "Name": "Com_D",
-          "HavingCount": 0
+          "HavingCount": 32
         },
         {
           "Name": "Com_E",
-          "HavingCount": 0
+          "HavingCount": 27
         }
       ]
     },
@@ -28,23 +28,23 @@
       "charactor": [
         {
           "Name": "Rar_F",
-          "HavingCount": 2
+          "HavingCount": 18
         },
         {
           "Name": "Rar_G",
-          "HavingCount": 0
+          "HavingCount": 16
         },
         {
           "Name": "Rar_H",
-          "HavingCount": 1
+          "HavingCount": 18
         },
         {
           "Name": "Rar_I",
-          "HavingCount": 1
+          "HavingCount": 20
         },
         {
           "Name": "Rar_J",
-          "HavingCount": 1
+          "HavingCount": 23
         }
       ]
     },
@@ -52,23 +52,23 @@
       "charactor": [
         {
           "Name": "Epi_K",
-          "HavingCount": 0
+          "HavingCount": 10
         },
         {
           "Name": "Epi_L",
-          "HavingCount": 0
+          "HavingCount": 10
         },
         {
           "Name": "Epi_M",
-          "HavingCount": 1
+          "HavingCount": 17
         },
         {
           "Name": "Epi_N",
-          "HavingCount": 0
+          "HavingCount": 8
         },
         {
           "Name": "Epi_O",
-          "HavingCount": 1
+          "HavingCount": 21
         }
       ]
     },
@@ -76,7 +76,7 @@
       "charactor": [
         {
           "Name": "LEG_P",
-          "HavingCount": 0
+          "HavingCount": 1
         },
         {
           "Name": "LEG_Q",
@@ -100,11 +100,11 @@
       "charactor": [
         {
           "Name": "EV_PickUp_A",
-          "HavingCount": 0
+          "HavingCount": 1
         },
         {
           "Name": "EV_PickUp_B",
-          "HavingCount": 0
+          "HavingCount": 2
         }
       ]
     }
