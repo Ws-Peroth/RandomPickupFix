@@ -101,7 +101,7 @@ public class PickUp : MonoBehaviour
         havingTextRect.SetActive(false);
     }
     
-    public void ShowEventCharactorList()
+    public void ShowPickupCharactorList()
     {
         CharactorListText.text = WritePickupCharactorList();
         havingTextRect.SetActive(true);
@@ -135,10 +135,7 @@ public class PickUp : MonoBehaviour
 
             foreach (Charactor writeChar in charactorPool.GetCharactorList(i).charactor)
             {
-                if (writeChar.HavingCount > 0)
-                {
-                    text += " - " + writeChar.Name  + "\n";
-                }
+                text += " - " + writeChar.Name + "\n";
             }
 
             text += "\n";

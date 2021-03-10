@@ -4,7 +4,7 @@
       "charactor": [
         {
           "Name": "Com_A",
-          "HavingCount": 1
+          "HavingCount": 2
         },
         {
           "Name": "Com_B",
@@ -16,11 +16,11 @@
         },
         {
           "Name": "Com_D",
-          "HavingCount": 2
+          "HavingCount": 0
         },
         {
           "Name": "Com_E",
-          "HavingCount": 1
+          "HavingCount": 0
         }
       ]
     },
@@ -28,7 +28,7 @@
       "charactor": [
         {
           "Name": "Rar_F",
-          "HavingCount": 0
+          "HavingCount": 2
         },
         {
           "Name": "Rar_G",
@@ -40,7 +40,7 @@
         },
         {
           "Name": "Rar_I",
-          "HavingCount": 0
+          "HavingCount": 1
         },
         {
           "Name": "Rar_J",
@@ -64,7 +64,7 @@
         },
         {
           "Name": "Epi_N",
-          "HavingCount": 1
+          "HavingCount": 0
         },
         {
           "Name": "Epi_O",
