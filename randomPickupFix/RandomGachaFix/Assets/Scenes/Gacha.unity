@@ -2364,9 +2364,11 @@ MonoBehaviour:
   prefebManager: {fileID: 105293117}
   textPrefeb: {fileID: 2549702133502800880, guid: d0b090ea79d90b44681017c8c4bbafec,
     type: 3}
-  PickupCharactorContents: {fileID: 0}
+  pickupCharactorContents: {fileID: 1336927910}
   HavingCharactorContents: {fileID: 57847455}
   havingTextRect: {fileID: 206572512}
+  pickupCharactorListRect: {fileID: 1988428188}
+  pickingCharactors: {fileID: 0}
   CharactorListText: {fileID: 0}
   count: {fileID: 1474449982}
   eventCount: {fileID: 1017933089}

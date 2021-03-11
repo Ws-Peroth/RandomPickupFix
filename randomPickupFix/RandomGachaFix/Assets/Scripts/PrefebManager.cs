@@ -12,7 +12,7 @@ public class PrefebManager : MonoBehaviour
     {
         manager = this;
 
-        for (int i = 0; i < 500; i++)
+        for (int i = 0; i < 50; i++)
         {
             GameObject obj = Instantiate(texPrefeb);
             PerfebSetParent(obj);
@@ -36,6 +36,6 @@ public class PrefebManager : MonoBehaviour
 
     public void PerfebSetParent(GameObject obj)
     {
-        // obj.transform.SetParent(gameObject.transform);
+        obj.transform.SetParent(gameObject.transform);
     }
 }

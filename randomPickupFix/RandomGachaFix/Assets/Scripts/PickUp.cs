@@ -19,13 +19,13 @@ public class PickUp : MonoBehaviour
 
     public GameObject textPrefeb;
 
-    public GameObject PickupCharactorContents;
+    public GameObject pickupCharactorContents;
     public GameObject HavingCharactorContents;
 
     public GameObject havingTextRect;
-    // public GameObject pickupCharactorListRect;
+    public GameObject pickupCharactorListRect;
 
-    // public Text pickingCharactors;
+   public Text pickingCharactors;
     public Text CharactorListText;
     public Text count;
     public Text eventCount;
@@ -104,23 +104,24 @@ public class PickUp : MonoBehaviour
             Transform ObjTransform = parentTransform.transform.GetChild(0);
 
             ObjTransform.SetParent(prefebManager.transform);
+            ObjTransform.gameObject.SetActive(false);
         }
     }
 
     public void ClosePickupCharactorListUI()
     {
-        DeleteTextPrefebs(HavingCharactorContents);
-        havingTextRect.SetActive(false);
+        DeleteTextPrefebs(pickupCharactorContents);
+        pickupCharactorListRect.SetActive(false);
         pickable = false;
         isSkip = true;
     }
 
     public void ShowPickupCharactorListUI()
     {
-        havingTextRect.SetActive(true);
+        pickupCharactorListRect.SetActive(true);
         isSkip = false;
 
-        MakeTextPrefeb(HavingCharactorContents, "Picking Charactor\n");
+        MakeTextPrefeb(pickupCharactorContents, "Picking Charactor\n");
 
         Invoke(nameof(PickupAnimation), 0.5f);
     }
@@ -145,7 +146,7 @@ public class PickUp : MonoBehaviour
     {
         if (isSkip || pickingCharactorList.Count == 0) yield break;
 
-        MakeTextPrefeb(HavingCharactorContents, pickingCharactorList[0] + "\n");
+        MakeTextPrefeb(pickupCharactorContents, pickingCharactorList[0] + "\n");
 
         pickingCharactorList.RemoveAt(0);
         yield return new WaitForSeconds(1.0f);
