@@ -21,6 +21,7 @@ public class PickUp : MonoBehaviour
     public GameObject textPrefeb;
 
     public GameObject PickupCharactorContents;
+    public GameObject HavingCharactorContents;
     public GameObject havingTextRect;
     public GameObject pickupCharactorListRect;
 
@@ -47,6 +48,19 @@ public class PickUp : MonoBehaviour
     private List<string> pickingCharactorList = new List<string>();
     private bool pickable = false;
     private string path;
+
+    private void MakeTextPrefeb(GameObject parentObj, string text)
+    {
+        GameObject prefeb = Instantiate(textPrefeb);
+        prefeb.SetActive(true);
+
+        prefeb.transform.SetParent(parentObj.transform);
+
+        prefeb.transform.localScale = new Vector3(1, 1, 1);
+        prefeb.transform.localPosition = new Vector3(0, 0, 0);
+
+        prefeb.GetComponent<Text>().text = text;
+    }
 
     public void EventPickupButtonDown()
     {
@@ -91,18 +105,10 @@ public class PickUp : MonoBehaviour
 
     public void ShowPickupCharactorListUI()
     {
-
-        //  pickingCharactors.text = "Picking Charactor\n\n";
-
         pickupCharactorListRect.SetActive(true);
         isSkip = false;
 
-        GameObject prefeb = Instantiate(textPrefeb);
-        prefeb.SetActive(true);
-        prefeb.transform.SetParent(PickupCharactorContents.transform);
-        prefeb.transform.localScale = new Vector3(1, 1, 1);
-        prefeb.transform.localPosition = new Vector3(0, 0, 0);
-        prefeb.GetComponent<Text>().text = "Picking Charactor\n";
+        MakeTextPrefeb(PickupCharactorContents, "Picking Charactor\n");
 
         Invoke(nameof(PickupAnimation), 0.5f);
     }
@@ -113,8 +119,8 @@ public class PickUp : MonoBehaviour
     
     public void ShowPickupCharactorList()
     {
-        CharactorListText.text = WritePickupCharactorList();
         havingTextRect.SetActive(true);
+        WritePickupCharactorList();
     }
 
     private void PickupAnimation()
@@ -126,17 +132,7 @@ public class PickUp : MonoBehaviour
     {
         if (isSkip || pickingCharactorList.Count == 0) yield break;
 
-        GameObject prefeb = Instantiate(textPrefeb);
-        prefeb.SetActive(true);
-
-        prefeb.transform.SetParent(PickupCharactorContents.transform);
-
-        prefeb.transform.localScale = new Vector3(1, 1, 1);
-        prefeb.transform.localPosition = new Vector3(0, 0, 0);
-
-        prefeb.GetComponent<Text>().text = pickingCharactorList[0] + "\n";
-
-        //pickingCharactors.text += pickingCharactorList[0] + "\n";
+        MakeTextPrefeb(PickupCharactorContents, pickingCharactorList[0] + "\n");
 
         pickingCharactorList.RemoveAt(0);
         yield return new WaitForSeconds(1.0f);
@@ -145,12 +141,16 @@ public class PickUp : MonoBehaviour
         yield return null;
     }
 
-    private string WritePickupCharactorList()
+    private void WritePickupCharactorList()
     {
-        string text = "Pickup Charactor List\n\n";
+        // string text = "Pickup Charactor List\n\n";
 
+        MakeTextPrefeb(HavingCharactorContents, "Pickup Charactor List\n\n");
+
+        
         for (int i = 0; i <= RarityToInt(Rarities.EVENT_LEGEND); i++)
         {
+            string text = "";
             text += "[" + rarityName[i] + "]\n";
 
             foreach (Charactor writeChar in charactorPool.GetCharactorList(i).charactor)
@@ -158,10 +158,8 @@ public class PickUp : MonoBehaviour
                 text += " - " + writeChar.Name + "\n";
             }
 
-            text += "\n";
+            MakeTextPrefeb(HavingCharactorContents, text);
         }
-
-        return text;
     }
 
     public void ResetPickup()
@@ -190,8 +188,8 @@ public class PickUp : MonoBehaviour
 
     public void ShowHavingCharactorList()
     {
-        CharactorListText.text = WriteHavingCharactorText();
         havingTextRect.SetActive(true);
+        WriteHavingCharactorText();
     }
 
     private Rarities IntToRarity(int rarity)
@@ -300,10 +298,11 @@ public class PickUp : MonoBehaviour
 
     private string WriteHavingCharactorText()
     {
-        string text = "Charactor Inentory\n\n";
+        MakeTextPrefeb(HavingCharactorContents, "Charactor Inentory\n\n");
 
         for (int i = 0; i <= RarityToInt(Rarities.EVENT_LEGEND); i++)
         {
+            string text = "";
             text += "[" + rarityName[i] + "]\n";
 
             foreach (Charactor writeChar in charactorPool.GetCharactorList(i).charactor)
@@ -314,10 +313,10 @@ public class PickUp : MonoBehaviour
                 }
             }
 
-            text += "\n";
+            MakeTextPrefeb(HavingCharactorContents, text);
         }
 
-        return text;
+        return "";
     }
 
     private void LoadData()
