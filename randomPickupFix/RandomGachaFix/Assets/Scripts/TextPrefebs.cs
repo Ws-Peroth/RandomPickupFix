@@ -10,6 +10,4 @@ public class TextPrefebs : MonoBehaviour
         PrefebManager.manager.ObjEnque(gameObject);
     }
 
-
-
 }
