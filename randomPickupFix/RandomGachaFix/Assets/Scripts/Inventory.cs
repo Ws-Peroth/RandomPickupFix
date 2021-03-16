@@ -24,24 +24,30 @@ public class Inventory : MonoBehaviour
         var loadJson = File.ReadAllText(path);
         CharactorPool initCharactor = JsonConvert.DeserializeObject<CharactorPool>(loadJson);
 
-        InitPrefebs(initCharactor);
+        MakePrefebs(initCharactor);
     }
 
-    private void InitPrefebs(CharactorPool initCharactor)
+
+    private void MakePrefebs(CharactorPool initCharactor)
     {
         int charactorLength = initCharactor.charactorListWithRarity.Count;
         for (int i = 0; i < charactorLength; i++)
-        {
-           
+        {           
             for (int j = 0; j < initCharactor.charactorListWithRarity[i].charactor.Count; j++)
             {
-                GameObject makeObj = Instantiate(charactorProfilePrefeb);
-                makeObj.transform.SetParent(charactorContent.transform);
-                makeObj.GetComponent<InventoryPrefeb>().InitInventoryElement((i * charactorLength) + j, Charactorimgs[i]);
-                makeObj.transform.localScale = new Vector3(1, 1, 1);
-                makeObj.transform.localPosition = new Vector3(1, 1, 1);
-                makeObj.GetComponent<InventoryPrefeb>().myImg.transform.localScale = new Vector3(1, 1, 1);
+                string name = initCharactor.charactorListWithRarity[i].charactor[j].Name;
+                InitPrefeb((i * charactorLength) + j, Charactorimgs[i], name);                
             }
         }
+    }
+
+    private void InitPrefeb(int setNum, Sprite setImg, string name)
+    {
+        GameObject makeObj = Instantiate(charactorProfilePrefeb);
+        makeObj.transform.SetParent(charactorContent.transform);
+        makeObj.GetComponent<InventoryPrefeb>().InitInventoryElement(setNum, setImg);
+        makeObj.transform.localScale = new Vector3(1, 1, 1);
+        makeObj.transform.localPosition = new Vector3(1, 1, 1);
+        makeObj.GetComponent<InventoryPrefeb>().name = name;
     }
 }

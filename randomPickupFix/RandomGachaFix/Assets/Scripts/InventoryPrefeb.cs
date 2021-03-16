@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class InventoryPrefeb : MonoBehaviour
 {
+    public string name = "";
     public Image myImg;
     private int selectCharactorNumber;
     
@@ -21,7 +22,7 @@ public class InventoryPrefeb : MonoBehaviour
 
     public void IsButtonDown()
     {
-        Debug.Log("Call Information charactor Num : " + selectCharactorNumber);
+        Debug.Log("Call Information charactor Num : " + selectCharactorNumber + "\nName : " + name);
     }
 
 }
