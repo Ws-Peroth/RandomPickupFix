@@ -70,5 +70,6 @@ public class Inventory : MonoBehaviour
     public void ShowInformation()
     {
         informationText.text = "Name : " + charactorName + "\nRarity : ???\nInformation : ???";
+        LayoutRebuilder.ForceRebuildLayoutImmediate(informationText.GetComponent<RectTransform>());
     }
 }
