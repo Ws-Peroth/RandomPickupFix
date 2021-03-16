@@ -7,6 +7,7 @@ public class PrefebManager : MonoBehaviour
     public static PrefebManager manager;
     Queue<GameObject> perfebQueue = new Queue<GameObject>();
     public GameObject texPrefeb;
+
     // Start is called before the first frame update
     void Start()
     {
